@@ -1,9 +1,8 @@
 import React from "react";
 
 const PostInfo = () => {
-    return (
-        <di>its corn</di>
+    return (<div>Posts</div>
     )
 }
 
-export default PostInfo
+export default PostInfo;
