@@ -4,9 +4,6 @@ import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom';
 import './style.css';
 import {PostInfo, Login, Profile} from './pages';
 
-const cohortName = '2209-FTB-CT-WEB-PT';
-const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}/posts/`;
-
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -29,7 +26,7 @@ const App = () => {
   return (
     <div className="navLinks">
       <BrowserRouter>
-        <header>
+        <main>
           <h1 className="title">Welcome to Stranger's Things!</h1>
           <NavLink exact to="/"
             activeClassName="current-link">
@@ -50,13 +47,16 @@ const App = () => {
           
           <Switch>
             <Route exact path="/"></Route>
-          <Route path="/pages/post-info"> <PostInfo /></Route>
-          <Route path="/pages/posts/profile"> <Profile /></Route>
-          <Route path="/pages/posts/login"> <Login /></Route>
+            <Route path="/post-info"><PostInfo
+              posts={posts}
+              setPosts={setPosts}
+/></Route>
+          <Route path="/profile"> <Profile /></Route>
+          <Route path="/login"> <Login /></Route>
           </Switch>
-        </header>
+        </main>
       </BrowserRouter>
-  </div>
+    </div>
   )
 
 }

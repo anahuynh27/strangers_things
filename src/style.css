@@ -4,15 +4,13 @@ a {
     color: #345a54;
     background-color: #f7a797;
 }
-.navLinks {
-    display: flex; 
-    flex-direction: row;
-}
+
 .title {
     color: #651d15;
-
+    font-family: 'Rubik Vinyl', cursive
 }
-header {
+
+main {
     margin: 1rem;
     background-color: #f7a797;
 }
