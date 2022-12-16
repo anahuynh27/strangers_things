@@ -1,5 +1,4 @@
 a {
-    border: 1px solid black;
     padding: 10px;
     color: #345a54;
     background-color: #f7a797;
@@ -17,4 +16,8 @@ main {
 .current-link {
     font-weight: bolder;
     color: black;
+}
+.userAndpass {
+    display: flex;
+    flex-direction: column;
 }

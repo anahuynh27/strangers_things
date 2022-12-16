@@ -1,6 +1,5 @@
-export const cohortName = "2209-FTB-CT-WEB-PT";
-export const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}/posts`;
-console.log(APIURL);
+export const APIURL = `https://strangers-things.herokuapp.com/api/2209-FTB-CT-WEB-PT`;
+
 
 export async function fetchAuthorizationPosts() {
   APIURL,
@@ -20,11 +19,53 @@ export async function fetchAuthorizationPosts() {
 //GET /api/COHORT-NAME/posts
 export const fetchAllPostsThatsPosted = async () => {
   try {
-    const response = await fetch(`${APIURL}`);
+    const response = await fetch(`${APIURL}/posts`);
     const result = await response.json();
-    return setPosts(result.data.posts);
-
+    return result.data.posts;
   } catch (error) {
     console.error;
   }
 };
+
+//POST /api/COHORT-NAME/users/register
+export const fetchNewUserRegister = async (username, password) => {
+  try {
+    const response = await fetch(`${APIURL}/users/register`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+          username: username,
+          password: password
+        }
+      })
+    });
+    const result = await response.json();
+    return result.data.token
+  } catch (error) {
+    console.error;
+  }
+}
+
+//POST /api/COHORT-NAME/users/login
+export const fetchRecurringUserLogin = async (username, password) => {
+  try {
+    const response = await fetch(`${APIURL}/users/login`, {
+  method: "POST",
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    user: {
+      username: username,
+      password: password
+    }
+  })
+    } 
+    )
+  } catch (error) {
+    console.error;
+  }
+}
