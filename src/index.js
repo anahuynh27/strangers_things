@@ -5,18 +5,7 @@ import "./style.css";
 import { PostInfo, Login, Profile, Home } from "./pages";
 
 const App = () => {
-
-  function postMatches(post, text) {
-    // return true if any of the fields you want to check against include the text
-    // strings have an .includes() method
-  }
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const resp = await fetch(APIURL);
-      console.log("resp: ", resp);
-    };
-  }), [];
+  const [token, setToken] = useState("");
 
   return (
     <div className="navLinks">
@@ -37,7 +26,7 @@ const App = () => {
           </NavLink>
 
           <Switch>
-            <Route exact path="/"><Home /></Route>
+            <Route exact path="/"><Home/></Route>
             <Route path="/post-info">
               <PostInfo />
             </Route>
@@ -45,7 +34,9 @@ const App = () => {
               <Profile />
             </Route>
             <Route path="/login">
-              <Login />
+              <Login
+                token={token}
+                setToken={setToken} />
             </Route>
           </Switch>
         </main>

@@ -43,7 +43,8 @@ export const fetchNewUserRegister = async (username, password) => {
       })
     });
     const result = await response.json();
-    return result.data.token
+    return result.data.token;
+    
   } catch (error) {
     console.error;
   }
@@ -63,9 +64,26 @@ export const fetchRecurringUserLogin = async (username, password) => {
       password: password
     }
   })
-    } 
-    )
+    })
+    const result = await response.json();
+    return result.data.token
   } catch (error) {
     console.error;
   }
 }
+
+//GET /api/COHORT-NAME/users/me
+export const fetchRecurringUserMe = async() => {
+  try {
+    const response = await fetch(`${APIURL}/users/me`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer TOKEN_STRING_HERE'
+      },
+    })
+  } catch (error) {
+    console.error('no user found, create account', error)
+  }
+}
+
+//GET /api/COHORT-NAME/test/me

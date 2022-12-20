@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import {fetchNewUserRegister} from '../api'
-import ReactDOM from "react-dom";
+import {fetchRecurringUserLogin} from '../api'
 
-const Login = () => {
+const Login = (token, setToken) => {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+    const [password, setPassword] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -12,8 +11,8 @@ const Login = () => {
         setUsername("");
         setPassword("");
         console.log(password);
-        let userNpass = await fetchNewUserRegister(username, password);
-        console.log(userNpass)
+        let token = await fetchRecurringUserLogin(username, password);
+        console.log(token); 
     }
 
     const handleChange = (event) => {
@@ -44,10 +43,20 @@ const Login = () => {
             </p>
         </form>
     </div>
-        
     )
 };
 
+const LoggedIn = () => {
+
+}
+
+const LoggedOut = () => {
+
+}
+
+const isLoggedIn = () => {
+
+}
 
 
 export default Login;

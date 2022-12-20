@@ -12,7 +12,7 @@ const Profile = () => {
           setPassword("");
           console.log(password);
           let userNpass = await fetchNewUserRegister(username, password);
-          console.log(userNpass)
+        console.log(userNpass); //token created
       }
   
       const handleChange = (event) => {
@@ -39,7 +39,7 @@ const Profile = () => {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)} />
             <button type="submit">Submit to Create New Account</button>
-            </form>
+      </form>
               </div>
 }
 
