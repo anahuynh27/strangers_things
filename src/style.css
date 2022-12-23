@@ -1,7 +1,7 @@
 a {
     padding: 10px;
     color: #345a54;
-    background-color: #f7a797;
+    font-family: 'Rubik Vinyl', cursive;
 }
 
 .title {
@@ -20,4 +20,18 @@ main {
 .userAndpass {
     display: flex;
     flex-direction: column;
+}
+* {
+    background-color: beige;
+}
+.listed-posts {
+    margin: 25px;
+    font-family: 'Rubik Vinyl', cursive;
+    border: 3px solid red
+}
+.nav-links {
+    background-color: #f7a797;
+}
+input {
+    background-color: white;
 }

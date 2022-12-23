@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {fetchNewUserRegister} from '../api'
 
 const Profile = () => {
@@ -16,11 +16,11 @@ const Profile = () => {
       }
   
       const handleChange = (event) => {
-          setUsername(event.target.value)
+        setUsername(event.target.value);
       }
   
     return <div className="login-container">
-          <h1>Profile</h1>
+          <h1>Create Profile</h1>
           
         <form
               className="userAndpass"
@@ -37,7 +37,8 @@ const Profile = () => {
                   type="password"
                   name="password"
                   value={password}
-                  onChange={(event) => setPassword(event.target.value)} />
+          onChange={(event) => setPassword(event.target.value)}
+        />
             <button type="submit">Submit to Create New Account</button>
       </form>
               </div>

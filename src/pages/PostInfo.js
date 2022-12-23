@@ -32,6 +32,7 @@ const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}/posts`;
     {posts.map((post, index) => {
       return (
         <div
+          className="listed-posts"
           key={index}>
           {post.title}
           {post.description}

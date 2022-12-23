@@ -6,11 +6,13 @@ import { PostInfo, Login, Profile, Home } from "./pages";
 
 const App = () => {
   const [token, setToken] = useState("");
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = (token !== "")
 
-  return (
-    <div className="navLinks">
+
+  return (<div id="nav-links">
       <BrowserRouter>
-        <main>
+        <header>
           <h1 className="title">Stranger's Things</h1>
           <NavLink exact to="/" activeClassName="current-link">
             Home
@@ -19,27 +21,34 @@ const App = () => {
             Post
           </NavLink>
           <NavLink to="/profile" activeClassName="current-link">
-            Profile
-          </NavLink>
+          {!isLoggedIn ? Profile : null}
+        </NavLink>
           <NavLink to="/login" activeClassName="current-link">
-            Login
+          {/* {isLoggedIn} ? login: Logout */}
+          Login
           </NavLink>
 
+
           <Switch>
-            <Route exact path="/"><Home/></Route>
+            <Route exact path="/"><Home
+            token={token} /></Route>
             <Route path="/post-info">
               <PostInfo />
             </Route>
             <Route path="/profile">
-              <Profile />
+            <Profile />
             </Route>
-            <Route path="/login">
+              <Route path="/login">
               <Login
-                token={token}
-                setToken={setToken} />
-            </Route>
-          </Switch>
-        </main>
+              token={token}
+              setToken={setToken}
+              // isLoggedIn={isLoggedIn}
+            // setIsLoggedIn={setIsLoggedIn} 
+            />
+              </Route>
+              
+            </Switch>
+        </header>
       </BrowserRouter>
     </div>
   );
