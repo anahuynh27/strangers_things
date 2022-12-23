@@ -2,7 +2,9 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 
-const NewPostForm = ({token}) => {
+const NewPostForm = ({ token }) => {
+    
+    
     return (
         <div className="create-new-post">
             <h1>Fill out the Form below</h1>
@@ -21,7 +23,10 @@ const NewPostForm = ({token}) => {
                 <input
                     type='text'
                     name='price'
-                    />
+                />
+                <button
+                    type="submit">
+                    Submit New Post</button>
             </form>
         </div>
     )

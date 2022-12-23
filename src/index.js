@@ -26,10 +26,11 @@ const App = () => {
           Profile
         </NavLink>
         }
-        {(!isLoggedIn) &&
+        {(!isLoggedIn) ?
           <NavLink to="/login" activeClassName="current-link">
             Login
           </NavLink>
+          : ("logout")
         }
 
 

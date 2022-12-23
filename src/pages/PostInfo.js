@@ -31,12 +31,13 @@ const PostInfo = ({token, setToken}) => {
 
   return (<div>
     {/* {!token ? <button>Create New Listing</button> : null} */}
-   
-    <Link to='/create-new-post'>
-      <button type="button">
-      Create New Post
-      </button>
-    </Link>
+    {(token) &&
+      <Link to='/create-new-post'>
+        <button type="button">
+          Create New Post
+        </button>
+      </Link>
+    }
 
     {/* <a href='/create-new-post'>Create New Post</a> */}
 
@@ -46,8 +47,10 @@ const PostInfo = ({token, setToken}) => {
         <div
           className="listed-posts"
           key={index}>
-          {post.title}
-          {post.description}
+          <h2>{post.title}</h2>
+          <h4>{post.description}</h4>
+          <h4>{post.price}</h4>
+          <h5>{post.author.username}</h5>
       </div>)
     })}
 
