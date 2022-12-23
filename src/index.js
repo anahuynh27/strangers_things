@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, NavLink, Switch } from "react-router-dom";
 import "./style.css";
-import { PostInfo, Login, Profile, Home } from "./pages";
+import { PostInfo, Login, Profile, Home, NewPostForm } from "./pages";
 
 const App = () => {
   const [token, setToken] = useState("");
@@ -19,21 +19,27 @@ const App = () => {
           </NavLink>
           <NavLink to="/post-info" activeClassName="current-link">
             Post
-          </NavLink>
-          <NavLink to="/profile" activeClassName="current-link">
-          {!isLoggedIn ? Profile : null}
         </NavLink>
+        
+        {(isLoggedIn) &&
+        <NavLink to="/profile" activeClassName="current-link">
+          Profile
+        </NavLink>
+        }
+        {(!isLoggedIn) &&
           <NavLink to="/login" activeClassName="current-link">
-          {/* {isLoggedIn} ? login: Logout */}
-          Login
+            Login
           </NavLink>
+        }
 
 
           <Switch>
             <Route exact path="/"><Home
             token={token} /></Route>
             <Route path="/post-info">
-              <PostInfo />
+            <PostInfo
+            token={token}
+            setToken={setToken}/>
             </Route>
             <Route path="/profile">
             <Profile />
@@ -46,7 +52,9 @@ const App = () => {
             // setIsLoggedIn={setIsLoggedIn} 
             />
               </Route>
-              
+          <Route path='/create-new-post'>
+            <NewPostForm />
+              </Route>
             </Switch>
         </header>
       </BrowserRouter>

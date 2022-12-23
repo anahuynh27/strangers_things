@@ -1,5 +1,5 @@
 a {
-    padding: 10px;
+    margin: 5px;
     color: #345a54;
     font-family: 'Rubik Vinyl', cursive;
 }
@@ -29,9 +29,10 @@ main {
     font-family: 'Rubik Vinyl', cursive;
     border: 3px solid red
 }
-.nav-links {
-    background-color: #f7a797;
-}
 input {
     background-color: white;
+}
+form {
+    display: flex;
+    flex-direction: column;
 }

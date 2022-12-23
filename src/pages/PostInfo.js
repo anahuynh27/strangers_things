@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { fetchAllPostsThatsPosted } from "../api";
+import { useHistory } from "react-router-dom";
+import NewPostForm from "./NewPostForm";
+import { Link } from "react-router-dom"
 
-const PostInfo = () => {
+const PostInfo = ({token, setToken}) => {
   const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   // const filteredPosts = posts.filter((post) => postMatches(post, searchTerm));
   // const postToDisplay = searchTerm.length ? filteredPosts : posts;
-
-const cohortName = "2209-FTB-CT-WEB-PT";
-const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}/posts`;
   
   useEffect(() => {
     // const fetchAllPostsThatsPosted = async () => {
@@ -28,7 +28,19 @@ const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}/posts`;
     postFunction();
   }, []);
 
+
   return (<div>
+    {/* {!token ? <button>Create New Listing</button> : null} */}
+   
+    <Link to='/create-new-post'>
+      <button type="button">
+      Create New Post
+      </button>
+    </Link>
+
+    {/* <a href='/create-new-post'>Create New Post</a> */}
+
+ 
     {posts.map((post, index) => {
       return (
         <div
@@ -37,7 +49,8 @@ const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}/posts`;
           {post.title}
           {post.description}
       </div>)
-      })}
+    })}
+
     </div>)
 }
 
