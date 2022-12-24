@@ -16,16 +16,6 @@ export async function fetchAuthorizationPosts() {
     };
 }
 
-//GET /api/COHORT-NAME/posts
-export const fetchAllPostsThatsPosted = async () => {
-  try {
-    const response = await fetch(`${APIURL}/posts`);
-    const result = await response.json();
-    return result.data.posts;
-  } catch (error) {
-    console.error;
-  }
-};
 
 //POST /api/COHORT-NAME/users/register
 export const fetchNewUserRegister = async (username, password) => {
@@ -69,7 +59,7 @@ export const fetchRecurringUserLogin = async (username, password) => {
     return result.data.token
   } catch (error) {
   alert("Account not found, create new account")
-  }
+}
 }
 
 //GET /api/COHORT-NAME/users/me
@@ -92,7 +82,7 @@ export const fetchRecurringUserMe = async(token) => {
 
 
 //POST /api/COHORT-NAME/posts
-export const fetchCreateNewPosts = async (post, token) => {
+export const fetchCreateNewPosts = async ( token, title, description, price, willDeliver) => {
   try {
     const response = await fetch(`${APIURL}/posts`, {
       method: "POST",
@@ -102,16 +92,42 @@ export const fetchCreateNewPosts = async (post, token) => {
       },
       body: JSON.stringify({
         post: {
-          title: "",
-          description: "",
-          price: "",
-          willDeliver: false
+          title: title,
+          description: description,
+          price: price,
+          willDeliver: willDeliver
         }
       })
     })
     const result = await response.json();
+    console.log(result)
     return result
 } catch (error) {
     console.error('post cannot be created', error)
+}
+}
+//GET /api/COHORT-NAME/posts
+export const fetchAllPostsThatsPosted = async () => {
+  try {
+    const response = await fetch(`${APIURL}/posts`);
+    const result = await response.json();
+    return result.data.posts;
+  } catch (error) {
+    console.error;
+  }
+};
+
+//DELETE /api/COHORT-NAME/posts/POST_ID
+export const fetchDeletePosts = async () => {
+  try {
+    const response = await fetch(`${APIURL}/posts/POST_ID`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+  })
+} catch (error) {
+  console.log(error)
 }
 }

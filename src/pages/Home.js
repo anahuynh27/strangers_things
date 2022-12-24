@@ -1,5 +1,4 @@
 import React from "react";
-import {fetchRecurringUserMe} from '../api'
 
 const Home = (token) => {
 

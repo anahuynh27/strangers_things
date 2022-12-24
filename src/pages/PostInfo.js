@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchAllPostsThatsPosted } from "../api";
+import { fetchAllPostsThatsPosted, fetchDeletePosts } from "../api";
 import { useHistory } from "react-router-dom";
 import NewPostForm from "./NewPostForm";
 import { Link } from "react-router-dom"
@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 const PostInfo = ({token, setToken}) => {
   const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [deletePosts, setDeletePosts] =useState([])
 
   // const filteredPosts = posts.filter((post) => postMatches(post, searchTerm));
   // const postToDisplay = searchTerm.length ? filteredPosts : posts;
@@ -28,7 +29,7 @@ const PostInfo = ({token, setToken}) => {
     postFunction();
   }, []);
 
-
+console.log(posts)
   return (<div>
     {/* {!token ? <button>Create New Listing</button> : null} */}
     {(token) &&
@@ -38,8 +39,11 @@ const PostInfo = ({token, setToken}) => {
         </button>
       </Link>
     }
-
-    {/* <a href='/create-new-post'>Create New Post</a> */}
+    {/* {(token) &&
+        (<button type="button">
+          Delete Post
+        </button>)
+    } */}
 
  
     {posts.map((post, index) => {
@@ -51,7 +55,17 @@ const PostInfo = ({token, setToken}) => {
           <h4>{post.description}</h4>
           <h4>{post.price}</h4>
           <h5>{post.author.username}</h5>
-      </div>)
+
+          <div>
+          {(token) &&
+        (<button type="button">
+          Delete Post
+              </button>)}
+            
+          </div>
+
+        </div>
+      )
     })}
 
     </div>)
@@ -59,3 +73,5 @@ const PostInfo = ({token, setToken}) => {
 
 
 export default PostInfo;
+
+//isAuthor is false. Need to set to true to be able to delete

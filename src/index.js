@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, NavLink, Switch } from "react-router-dom";
 import "./style.css";
-import { PostInfo, Login, Profile, Home, NewPostForm } from "./pages";
+import { PostInfo, Login, CreateProfile, Home, NewPostForm, Profile } from "./pages";
 
 const App = () => {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.getItem('token'));
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const isLoggedIn = (token !== "")
-
+  const isLoggedIn = (token !== null)
+  const removeToken = () => {
+    setToken(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+  }
 
   return (<div id="nav-links">
       <BrowserRouter>
@@ -22,7 +26,7 @@ const App = () => {
         </NavLink>
         
         {(isLoggedIn) &&
-        <NavLink to="/profile" activeClassName="current-link">
+        <NavLink to="/Profile" activeClassName="current-link">
           Profile
         </NavLink>
         }
@@ -30,7 +34,7 @@ const App = () => {
           <NavLink to="/login" activeClassName="current-link">
             Login
           </NavLink>
-          : ("logout")
+          : <button onClick={removeToken}> Logout</button>
         }
 
 
@@ -41,21 +45,22 @@ const App = () => {
             <PostInfo
             token={token}
             setToken={setToken}/>
-            </Route>
-            <Route path="/profile">
-            <Profile />
+          </Route>
+            <Route path="/Create-Profile">
+            <CreateProfile />
             </Route>
               <Route path="/login">
               <Login
               token={token}
-              setToken={setToken}
-              // isLoggedIn={isLoggedIn}
-            // setIsLoggedIn={setIsLoggedIn} 
+              setToken={setToken} 
             />
               </Route>
           <Route path='/create-new-post'>
-            <NewPostForm />
-              </Route>
+            <NewPostForm
+            token={token}
+            setToken={setToken}/>
+          </Route>
+          <Route path="/profile"><Profile /></Route>
             </Switch>
         </header>
       </BrowserRouter>
