@@ -139,3 +139,26 @@ export const fetchDeletePosts = async (token, POST_ID) => {
   console.log(error)
 }
 }
+
+//POST /api/COHORT-NAME/posts/POST_ID/messages
+export const fetchPostMessages = async (token, POST_ID, content) => {
+  try {
+    const response = fetch(`${APIURL}/posts/${POST_ID}/messages`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        message: {
+          content: content
+        }
+      })
+    })
+    const result = await response.json();
+      console.log(result)
+    return result
+  } catch (error){
+    console.error
+    }
+  }

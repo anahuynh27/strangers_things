@@ -17,10 +17,6 @@ main {
     font-weight: bolder;
     color: black;
 }
-.userAndpass {
-    display: flex;
-    flex-direction: column;
-}
 * {
     background-color: beige;
 }
@@ -35,4 +31,8 @@ input {
 form {
     display: flex;
     flex-direction: column;
+}
+.login-button {
+    background-color:  #651d15;
+    color: white;
 }

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { fetchAllPostsThatsPosted, fetchDeletePosts } from "../api";
+import { fetchAllPostsThatsPosted, fetchDeletePosts, fetchPostMessages } from "../api";
 import { useHistory } from "react-router-dom";
 import NewPostForm from "./NewPostForm";
 import { Link } from "react-router-dom"
 
-const PostInfo = ({token, setToken}) => {
-  const [posts, setPosts] = useState([]);
+const PostInfo = ({token, setToken, posts, setPosts}) => {
+  // const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [deletePosts, setDeletePosts] = useState([])
+  const [deletePosts, setDeletePosts] = useState([]);
+  const [content, setContent] = useState("");
 
   console.log(posts)
 
@@ -33,6 +34,25 @@ const PostInfo = ({token, setToken}) => {
     }
   }
 
+  const handleMessage = async (POST_ID) => {
+  
+    try {
+      let sendMessage = await fetchPostMessages(token, POST_ID, content);
+      console.log(sendMessage);
+      } catch (error) {
+      console.error('cannot send message', error)
+    } 
+  }
+
+    // const showHideTextBox = () => {
+    //   return <div>
+    //     <input
+    //       type='text'
+    //       value='content'
+    //       onChange={handleMessage}
+    //     >
+    //     </input>
+    //   </div>
   return (<div>
     {(token) &&
       <Link to='/create-new-post'>
@@ -61,7 +81,18 @@ const PostInfo = ({token, setToken}) => {
                 onClick={()=> handleDelete(post._id)}>
           Delete Post
               </button>)}
-            
+          </div>
+
+          <div>
+          {(token) &&
+              (<Link to={`/send-message-${post._id}`}>
+                <button type="button"
+                // onClick={() => handleMessage(post._id)}
+              onClick={handleMessage}
+            >
+          Send Message
+              </button>
+              </Link>)}
           </div>
 
         </div>
