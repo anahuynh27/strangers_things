@@ -124,9 +124,9 @@ export const fetchAllPostsThatsPosted = async (token) => {
 };
 
 //DELETE /api/COHORT-NAME/posts/POST_ID
-export const fetchDeletePosts = async (token, POST_ID) => {
+export const fetchDeletePosts = async (token, _id) => {
   try {
-    const response = await fetch(`${APIURL}/posts/${POST_ID}`, {
+    const response = await fetch(`${APIURL}/posts/${_id}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',
@@ -141,9 +141,9 @@ export const fetchDeletePosts = async (token, POST_ID) => {
 }
 
 //POST /api/COHORT-NAME/posts/POST_ID/messages
-export const fetchPostMessages = async (token, POST_ID, content) => {
+export const fetchPostMessages = async (token, _id, content) => {
   try {
-    const response = fetch(`${APIURL}/posts/${POST_ID}/messages`, {
+    const response = fetch(`${APIURL}/posts/${_id}/messages`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

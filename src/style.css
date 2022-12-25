@@ -36,3 +36,6 @@ form {
     background-color:  #651d15;
     color: white;
 }
+.send-message-textbox {
+    padding: 50px;
+}

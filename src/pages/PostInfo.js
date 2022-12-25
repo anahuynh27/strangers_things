@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import NewPostForm from "./NewPostForm";
 import { Link } from "react-router-dom"
 
-const PostInfo = ({token, setToken, posts, setPosts}) => {
+const PostInfo = ({token, setToken, posts, setPosts, _id, set_Id}) => {
   // const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [deletePosts, setDeletePosts] = useState([]);
@@ -23,10 +23,10 @@ const PostInfo = ({token, setToken, posts, setPosts}) => {
     postFunction();
   }, []);
 
-  const handleDelete = async (POST_ID) => {
+  const handleDelete = async (_id) => {
 
     try {
-      let deletePosts = await fetchDeletePosts(token, POST_ID);
+      let deletePosts = await fetchDeletePosts(token, _id);
       console.log(deletePosts)
       location.reload()
     } catch (error) {
@@ -34,25 +34,8 @@ const PostInfo = ({token, setToken, posts, setPosts}) => {
     }
   }
 
-  const handleMessage = async (POST_ID) => {
-  
-    try {
-      let sendMessage = await fetchPostMessages(token, POST_ID, content);
-      console.log(sendMessage);
-      } catch (error) {
-      console.error('cannot send message', error)
-    } 
-  }
 
-    // const showHideTextBox = () => {
-    //   return <div>
-    //     <input
-    //       type='text'
-    //       value='content'
-    //       onChange={handleMessage}
-    //     >
-    //     </input>
-    //   </div>
+
   return (<div>
     {(token) &&
       <Link to='/create-new-post'>
@@ -62,8 +45,6 @@ const PostInfo = ({token, setToken, posts, setPosts}) => {
       </Link>
     }
 
-
- 
     {posts.map((post, index) => {
       return (
         <div
@@ -86,15 +67,13 @@ const PostInfo = ({token, setToken, posts, setPosts}) => {
           <div>
           {(token) &&
               (<Link to={`/send-message-${post._id}`}>
-                <button type="button"
-                // onClick={() => handleMessage(post._id)}
-              onClick={handleMessage}
-            >
+              <button
+                type="button"
+                onClick={()=>set_Id(post._id)}>
           Send Message
               </button>
               </Link>)}
           </div>
-
         </div>
       )
     })}
