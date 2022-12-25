@@ -107,9 +107,15 @@ export const fetchCreateNewPosts = async ( token, title, description, price, wil
 }
 }
 //GET /api/COHORT-NAME/posts
-export const fetchAllPostsThatsPosted = async () => {
+export const fetchAllPostsThatsPosted = async (token) => {
   try {
-    const response = await fetch(`${APIURL}/posts`);
+    const response = await fetch(`${APIURL}/posts`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+  })
     const result = await response.json();
     return result.data.posts;
   } catch (error) {
@@ -118,15 +124,17 @@ export const fetchAllPostsThatsPosted = async () => {
 };
 
 //DELETE /api/COHORT-NAME/posts/POST_ID
-export const fetchDeletePosts = async () => {
+export const fetchDeletePosts = async (token, POST_ID) => {
   try {
-    const response = await fetch(`${APIURL}/posts/POST_ID`, {
+    const response = await fetch(`${APIURL}/posts/${POST_ID}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
   })
+  const result = await response.json();
+    return result;
 } catch (error) {
   console.log(error)
 }

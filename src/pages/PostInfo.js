@@ -7,31 +7,33 @@ import { Link } from "react-router-dom"
 const PostInfo = ({token, setToken}) => {
   const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [deletePosts, setDeletePosts] =useState([])
+  const [deletePosts, setDeletePosts] = useState([])
+
+  console.log(posts)
 
   // const filteredPosts = posts.filter((post) => postMatches(post, searchTerm));
   // const postToDisplay = searchTerm.length ? filteredPosts : posts;
   
   useEffect(() => {
-    // const fetchAllPostsThatsPosted = async () => {
-    //   try {
-    //     const response = await fetch(`${APIURL}`);
-    //     const result = await response.json();
-    //     setPosts(result.data.posts);
-    //   } catch (error) {
-    //     console.error;
-    //   }
-    // };
     const postFunction = async () => {
-      let allPost = await fetchAllPostsThatsPosted();
+      let allPost = await fetchAllPostsThatsPosted(token);
       setPosts(allPost);
     }
     postFunction();
   }, []);
 
-console.log(posts)
+  const handleDelete = async (POST_ID) => {
+
+    try {
+      let deletePosts = await fetchDeletePosts(token, POST_ID);
+      console.log(deletePosts)
+      location.reload()
+    } catch (error) {
+      console.error()
+    }
+  }
+
   return (<div>
-    {/* {!token ? <button>Create New Listing</button> : null} */}
     {(token) &&
       <Link to='/create-new-post'>
         <button type="button">
@@ -39,11 +41,7 @@ console.log(posts)
         </button>
       </Link>
     }
-    {/* {(token) &&
-        (<button type="button">
-          Delete Post
-        </button>)
-    } */}
+
 
  
     {posts.map((post, index) => {
@@ -55,10 +53,12 @@ console.log(posts)
           <h4>{post.description}</h4>
           <h4>{post.price}</h4>
           <h5>{post.author.username}</h5>
+          <h2>{post._id}</h2>
 
           <div>
-          {(token) &&
-        (<button type="button">
+          {(token && post.isAuthor == true) &&
+              (<button type="button"
+                onClick={()=> handleDelete(post._id)}>
           Delete Post
               </button>)}
             
@@ -74,4 +74,3 @@ console.log(posts)
 
 export default PostInfo;
 
-//isAuthor is false. Need to set to true to be able to delete
