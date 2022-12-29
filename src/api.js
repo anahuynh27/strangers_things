@@ -141,7 +141,7 @@ export const fetchDeletePosts = async (token, _id) => {
 }
 
 //POST /api/COHORT-NAME/posts/POST_ID/messages
-export const fetchPostMessages = async (token, _id, content) => {
+export const fetchPostMessages = async (token,  content) => {
   try {
     const response = fetch(`${APIURL}/posts/${_id}/messages`, {
       method: "POST",

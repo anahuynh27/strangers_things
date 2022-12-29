@@ -13,6 +13,7 @@ const CreateProfile = () => {
           console.log(password);
           let userNpass = await fetchNewUserRegister(username, password);
         console.log(userNpass); //token created
+        prompt("Account Created!")
       }
   
       const handleChange = (event) => {

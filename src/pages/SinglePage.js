@@ -15,9 +15,12 @@ function helperSinglePage({posts}) {
 const SinglePage = ({ posts, setPosts, token, setToken, _id }) => {
   const [content, setContent] = useState("");
   console.log(_id)
-
-    const handleMessage = async (_id) => {
+  console.log(posts)
+  console.log(token)
   
+    const handleMessage = async (event) => {
+      event.preventDefault();
+      setContent(event.target.value)
         try {
           let sendMessage = await fetchPostMessages(token, _id, content);
           console.log(sendMessage);
@@ -30,17 +33,10 @@ const SinglePage = ({ posts, setPosts, token, setToken, _id }) => {
           <Link to="/post-info"><PostInfo /></Link>
         }
     }
-
-    // useEffect(() => {
-    //   const postFunction = async () => {
-    //     let allPost = await fetchAllPostsThatsPosted(token);
-    //     setPosts(allPost);
-    //   }
-    //   postFunction();
-    // }, []);
  
     return (<div>
       <Link to="/post-info"><button>Go Back</button></Link>
+
       {posts.filter((post) => post._id === _id).map((post, index) => {
         return (
           <div
@@ -51,16 +47,16 @@ const SinglePage = ({ posts, setPosts, token, setToken, _id }) => {
             <h4>{post.price}</h4>
             <h5>{post.author.username}</h5>
             <h2>{post._id}</h2>
-            <input 
-              type="text"
-              name="message"
-              className="send-message-textbox"
-              value={content}
-              onChange={handleMessage} />
-            <button type="submit">Submit</button>
           </div>)
-
       })}
+      <form>
+        <h4>Send Message</h4>
+        <textarea name="content"
+          value={content}
+          onChange={handleMessage}
+        ></textarea>
+        <button>Submit</button>
+    </form>
         </div>
     )
 }
