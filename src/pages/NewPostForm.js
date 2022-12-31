@@ -15,13 +15,6 @@ const NewPostForm = ({ token }) => {
     let username = localStorage.getItem('username');
  
 
-    // useEffect(() => {
-    //     const createdNewPosts = async () => {
-    //         let iCreatedaPost = await fetchCreateNewPosts();
-    //         setPosts(iCreatedaPost);
-    //     }
-    //     createdNewPosts();
-    // }, []);
 
     const handleClick = (event) => {
         event.preventDefault();
@@ -32,6 +25,7 @@ const NewPostForm = ({ token }) => {
         setDescription("");
         setPrice("");
         setWillDeliver("");
+        window.location = '/post-info'
     }
     
    

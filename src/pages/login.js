@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchRecurringUserLogin } from '../api';
 import { useHistory } from "react-router-dom";
 import { fetchRecurringUserMe } from '../api';
+import { Route } from "react-router-dom";
 
 
 
@@ -29,9 +30,7 @@ const Login = ({token, setToken}) => {
         } catch (error) {
             console.error();
         } finally {
-            // let history = useHistory();
-            // history.push("/post-info");
-            console.log(token)
+            alert('you are now logged in');
         }
     }
 
@@ -63,23 +62,11 @@ const Login = ({token, setToken}) => {
             <p>Don't have an account?
                 <a href='/Create-Profile'>Sign Up Here</a>
                 </p>
-                {/* {token}
-                {String(isLoggedIn)} */}
         </form>
         </div> 
         ) 
 };
 
-const LoggedIn = (setToken) => {
-    setToken(username)
-}
-
-const LoggedOut = (setToken) => {
-    setToken("");
-    setUsername("");
-    setPassword("");
-    <h3>You've been logged out</h3>
-}
 
 export default Login;
 

@@ -72,7 +72,7 @@ export const fetchRecurringUserMe = async(token) => {
       },
     })
     const result = await response.json();
-    return result
+    return result.data
   } catch (error) {
     console.error('no user found, create account', error)
   }
@@ -141,7 +141,7 @@ export const fetchDeletePosts = async (token, _id) => {
 }
 
 //POST /api/COHORT-NAME/posts/POST_ID/messages
-export const fetchPostMessages = async (token,  content) => {
+export const fetchPostMessages = async (token, _id, content) => {
   try {
     const response = fetch(`${APIURL}/posts/${_id}/messages`, {
       method: "POST",

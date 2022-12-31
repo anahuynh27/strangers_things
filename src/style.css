@@ -39,3 +39,8 @@ form {
 .send-message-textbox {
     padding: 50px;
 }
+.post-info-page {
+    display: flex; 
+    align-items: center;
+    flex-direction: column;
+}

@@ -4,11 +4,11 @@ import { useHistory } from "react-router-dom";
 import NewPostForm from "./NewPostForm";
 import { Link } from "react-router-dom"
 
-const PostInfo = ({token, setToken, posts, setPosts, _id, set_Id}) => {
+const PostInfo = ({token, setToken, posts, setPosts, _id, set_Id, content, setContent}) => {
   // const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [deletePosts, setDeletePosts] = useState([]);
-  const [content, setContent] = useState("");
+
 
   console.log(posts)
 
@@ -27,16 +27,15 @@ const PostInfo = ({token, setToken, posts, setPosts, _id, set_Id}) => {
 
     try {
       let deletePosts = await fetchDeletePosts(token, _id);
-      console.log(deletePosts)
-      location.reload()
+      console.log(deletePosts);
+      window.confirm("delete message?") && location.reload() 
     } catch (error) {
       console.error()
     }
   }
 
 
-
-  return (<div>
+  return (<div className='post-info-page'>
     {(token) &&
       <Link to='/create-new-post'>
         <button type="button">
@@ -55,8 +54,8 @@ const PostInfo = ({token, setToken, posts, setPosts, _id, set_Id}) => {
           <h4>{post.price}</h4>
           <h5>{post.author.username}</h5>
           <h2>{post._id}</h2>
-
           <div>
+
           {(token && post.isAuthor == true) &&
               (<button type="button"
                 onClick={()=> handleDelete(post._id)}>
@@ -69,7 +68,8 @@ const PostInfo = ({token, setToken, posts, setPosts, _id, set_Id}) => {
               (<Link to={`/send-message-${post._id}`}>
               <button
                 type="button"
-                onClick={()=>set_Id(post._id)}>
+                onClick={() => set_Id(post._id)}
+              >
           Send Message
               </button>
               </Link>)}

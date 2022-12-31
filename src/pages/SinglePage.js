@@ -3,36 +3,30 @@ import { Link, useParams } from "react-router-dom";
 import { fetchAllPostsThatsPosted, fetchPostMessages } from "../api";
 import PostInfo from "./PostInfo";
 
-function helperSinglePage({posts}) {
-  const { _id } = useParams();
-  return (
-    <div>
-      <h2>hello from helper single function</h2>
-    </div>
-  )
-}
 
-const SinglePage = ({ posts, setPosts, token, setToken, _id }) => {
-  const [content, setContent] = useState("");
-  console.log(_id)
-  console.log(posts)
-  console.log(token)
+
+// useEffect(() => {
+  //   const messages = async (token, content) => {
+    //     let postMsg = await fetchPostMessages(token, content);
+    //   }
+    //   postMsg();
+    // }, []);
+    
+    
+const SinglePage = ({ posts, token, _id, content, setContent }) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    let sendMessage = await fetchPostMessages(token, _id, content);
+    console.log(sendMessage);
+    alert('message sent!');
+    return
+  }
   
-    const handleMessage = async (event) => {
-      event.preventDefault();
-      setContent(event.target.value)
-        try {
-          let sendMessage = await fetchPostMessages(token, _id, content);
-          console.log(sendMessage);
-          setPosts(sendMessage);
-          alert('message sent!')
-          } catch (error) {
-          console.error('cannot send message', error)
-        } finally {
-          localStorage.removeItem('_id');
-          <Link to="/post-info"><PostInfo /></Link>
-        }
-    }
+
+  // console.log(_id)
+  // console.log(posts)
+  // console.log(token)
+  
  
     return (<div>
       <Link to="/post-info"><button>Go Back</button></Link>
@@ -49,19 +43,29 @@ const SinglePage = ({ posts, setPosts, token, setToken, _id }) => {
             <h2>{post._id}</h2>
           </div>)
       })}
-      <form>
+
+      {<h2>Preview:{content}</h2>}
+     
+
+      <form className="send-message-content"
+        onSubmit={(event) => handleSubmit(event)}
+      >
         <h4>Send Message</h4>
-        <textarea name="content"
+        <input
+          type="text"
+          name="content"
           value={content}
-          onChange={handleMessage}
-        ></textarea>
-        <button>Submit</button>
+          onChange={(event) => setContent(event.target.value)}
+        />
+
+        <input type="submit"
+        value="Submit"
+        ></input>
     </form>
-        </div>
+    </div>
     )
 }
 
+
 export default SinglePage;
 
-//react_devtools_backend.js:4012 cannot send message TypeError: Cannot read properties of undefined (reading 'filter') 
-//cannot send message. Whenever I type anything in the textbox, the site crashes. 

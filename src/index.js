@@ -8,6 +8,7 @@ const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [posts, setPosts] = useState([]);
   const [_id, set_Id] = useState("");
+  const [content, setContent] = useState("");
   const isLoggedIn = (token !== null);
   const removeToken = () => {
     setToken(null);
@@ -60,8 +61,10 @@ const App = () => {
         {(isLoggedIn) &&
         <NavLink to="/Profile" activeClassName="current-link">
           Profile
-        </NavLink>
+          </NavLink> 
         }
+
+
         {(!isLoggedIn) ?
           <NavLink to="/login" activeClassName="current-link">
             <button className='login-button'>Login</button>
@@ -80,7 +83,10 @@ const App = () => {
               posts={posts}
               setPosts={setPosts}
               _id={_id}
-              set_Id={set_Id} />
+              set_Id={set_Id}
+              content={content}
+              setContent={setContent}
+            />
           </Route>
             <Route path="/Create-Profile">
             <CreateProfile />
@@ -96,7 +102,11 @@ const App = () => {
             token={token}
             setToken={setToken}/>
           </Route>
-          <Route path="/profile"><Profile /></Route>
+          <Route path="/profile"><Profile
+            posts={posts}
+            token={token}
+            setPosts={setPosts}
+          /></Route>
 
           <Route>
             <Route
@@ -107,6 +117,8 @@ const App = () => {
                 token={token}
                 setToken={setToken}
                 _id={_id}
+                content={content}
+              setContent={setContent}
               />
           </Route>
       </Route>
