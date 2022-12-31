@@ -5,12 +5,12 @@ import NewPostForm from "./NewPostForm";
 import { Link } from "react-router-dom"
 
 const PostInfo = ({token, setToken, posts, setPosts, _id, set_Id, content, setContent}) => {
-  // const [posts, setPosts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState("");
   const [deletePosts, setDeletePosts] = useState([]);
 
 
   console.log(posts)
+  console.log(search)
 
   // const filteredPosts = posts.filter((post) => postMatches(post, searchTerm));
   // const postToDisplay = searchTerm.length ? filteredPosts : posts;
@@ -34,8 +34,14 @@ const PostInfo = ({token, setToken, posts, setPosts, _id, set_Id, content, setCo
     }
   }
 
-
   return (<div className='post-info-page'>
+    {<form onSubmit={(event) =>(event.preventDefault())}>
+      <input
+        className='search-bar'
+        value={search}
+      onChange={(event) => {setSearch(event.target.value)}}
+    ></input></form>
+    }
     {(token) &&
       <Link to='/create-new-post'>
         <button type="button">
@@ -44,7 +50,18 @@ const PostInfo = ({token, setToken, posts, setPosts, _id, set_Id, content, setCo
       </Link>
     }
 
-    {posts.map((post, index) => {
+    {posts.filter(post => {
+      if (search === "") {
+        return post
+      } else if (post.title.toLowerCase().includes(search.toLowerCase())) {
+        return post.title
+      } else if (post.author.username.toLowerCase().includes(search.toLowerCase())) {
+        return post.author.username
+      } else if (post.description.toLowerCase().includes(search.toLowerCase())) {
+        return post.description
+      }
+        }
+    ).map((post, index) => {
       return (
         <div
           className="listed-posts"
